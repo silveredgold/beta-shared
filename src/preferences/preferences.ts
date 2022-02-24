@@ -1,4 +1,4 @@
-import { CensorType, IPreferences, OperationMode, rawPreferences } from ".";
+import { CensorType, IPreferences, OperationMode, rawPreferences } from "./types";
 import { toTitleCase } from "../util";
 
 
