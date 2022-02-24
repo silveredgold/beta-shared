@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "es2020",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "declaration": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "inlineSourceMap": true,
+        "noImplicitAny": false,
+        "outDir": "./dist/",
+        "paths": {
+            "#/*": [
+                "./src/*"
+            ]
+        },
+        "lib": [
+            "ES2020"
+        ]
+    },
+    "include": [
+        "./src/**/*.ts"
+    ],
+    "exclude": ["node_modules"]
+}

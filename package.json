@@ -1,0 +1,26 @@
+{
+    "name": "@silveredgold/beta-shared",
+    "version": "0.0.1-alpha1",
+    "description": "The shared types and functions used by Beta Protection.",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc --project ./tsconfig.json",
+        "build:docs": "typedoc",
+        "dist": "npm run build"
+    },
+    "author": "silveredgold",
+    "license": "GPL-3.0-or-later",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/silveredgold/beta-protection.git"
+    },
+    "devDependencies": {
+        "typescript": "^4.5.5"
+    },
+    "type": "module"
+}
