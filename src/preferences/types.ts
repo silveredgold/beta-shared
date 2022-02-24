@@ -45,7 +45,7 @@ export type SubliminalOptions = {
     duration: number;
 }
 
-type CensorMode = {method: CensorType, level: number};
+export type CensorMode = {method: CensorType, level: number};
 
 export type BodyCensorModes = {
     Pits: {method: CensorType, level: number},
