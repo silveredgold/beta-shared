@@ -1,6 +1,6 @@
 {
     "name": "@silveredgold/beta-shared",
-    "version": "0.0.1-alpha5",
+    "version": "0.0.1-alpha6",
     "description": "The shared types and functions used by Beta Protection.",
     "main": "./index.js",
     "types": "./index.d.ts",
@@ -14,11 +14,15 @@
     "license": "GPL-3.0-or-later",
     "repository": {
         "type": "git",
-        "url": "https://github.com/silveredgold/beta-protection.git"
+        "url": "https://github.com/silveredgold/beta-shared.git"
     },
     "devDependencies": {
         "copyfiles": "^2.4.1",
         "typescript": "^4.5.5"
     },
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "sockette": "^2.0.6",
+        "strongly-typed-events": "^2.1.14"
+    }
 }
