@@ -1,6 +1,7 @@
 import { SocketEvent } from "./events";
 import { ActionPayload, ConnectionStatus, ICensorBackend } from "..";
-import { IPreferences, toRaw } from "#/preferences";
+import { IPreferences } from "#/preferences";
+import { toBetaSafety } from "#/preferences/beta-safety";
 import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { WebSocketTransportClient } from "../webSocketTransportClient";
@@ -117,7 +118,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
                 tabid: +request.srcId!,
                 id: request.id,
                 priority: request.requestData["priority"] ?? 1,
-                preferences: toRaw(request.preferences),
+                preferences: toBetaSafety(request.preferences),
                 type: "normal", // I don't understand why this would be needed
                 domain: request.context.domain
             });

@@ -13,7 +13,7 @@ export interface IPreferences {
     exposed: BodyCensorModes;
     covered: BodyCensorModes;
     otherCensoring: {
-        femaleEyes: 'Nothing'|'Box'|'Sticker';
+        femaleEyes: 'None'|'Box'|'Sticker';
         femaleFace: {method: CensorType, level: number},
         maleFace: {method: CensorType, level: number}
     }
@@ -58,54 +58,19 @@ export type BodyCensorModes = {
 }
 
 export enum CensorType {
-    Nothing = "nothing",
-    Pixels = "pix",
+    None = "none",
+    Pixels = "pixels",
     Caption = "caption",
     Sticker = "sticker",
-    Blur = "blur"
+    Blur = "blur",
+    BlackBox = "blackbox"
 }
 
-export type rawPreferences = {
-    video: string;
-    modus: string;
-    fface: string;
-    feyes: string;
-    mface: string;
-    cpits: string;
-    epits: string;
-    cbreasts: string;
-    ebreasts: string;
-    cbelly: string;
-    ebelly: string;
-    cass: string;
-    eass: string;
-    cpussy: string;
-    epussy: string;
-    ccock: string;
-    ecock: string;
-    cfeet: string;
-    efeet: string;
-    rescalinglevel: string;
-    videolevel: string;
-    ffacelevel: string;
-    mfacelevel: string;
-    cpitslevel: string;
-    epitslevel: string;
-    cbreastslevel: string;
-    ebreastslevel: string;
-    cbellylevel: string;
-    ebellylevel: string;
-    casslevel: string;
-    easslevel: string;
-    cpussylevel: string;
-    epussylevel: string;
-    ccocklevel: string;
-    ecocklevel: string;
-    cfeetlevel: string;
-    efeetlevel: string;
-    localCopy: string;
-    obfuscate: string;
-    animate: string;
-    selectedPlaceholders: string[];
-    selectedStickers: string[];
+export const getCensorTypes = () => {
+    var names = Object.keys(CensorType).map(k => k.replace(/([A-Z])/g, " $1").trim());
+    var values = Object.values(CensorType);
+    var merged = names.map((val, idx) => {
+        return {label: val, value: values[idx]}
+    });
+    return merged;
 }

@@ -1,4 +1,5 @@
-import { createPreferencesFromBackend, IPreferences, rawPreferences } from "#/preferences";
+import { IPreferences } from "#/preferences";
+import { createPreferencesFromBackend, BetaSafetyPreferences } from "#/preferences/beta-safety";
 import { StatisticsData } from "..";
 import { BetaSafetyBackendClient } from "./client";
 
@@ -53,7 +54,7 @@ export const preferencesEvent: SocketEvent<Partial<IPreferences>> = {
         }
 
         if (parseInt(response.status) === 200) {
-            const rawPrefs = response["preferences"] as rawPreferences;
+            const rawPrefs = response["preferences"] as BetaSafetyPreferences;
             log('raw prefs', rawPrefs);
             const backendPrefs = createPreferencesFromBackend(rawPrefs);
             log('backend prefs', backendPrefs);
