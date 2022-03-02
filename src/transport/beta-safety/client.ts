@@ -4,6 +4,7 @@ import { IPreferences, toRaw } from "#/preferences";
 import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { WebSocketTransportClient } from "../webSocketTransportClient";
+import { log } from "missionlog";
 
 export class BetaSafetyBackendClient extends WebSocketTransportClient implements ICensorBackend {
     
@@ -29,7 +30,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
         super(requestId, host);
         this.messageEvents.push(...socketEvents);
     }
-    
+
     async cancelRequests(request: CancelRequest): Promise<void> {
         if (request.srcId) {
             this.sendObj({
@@ -46,7 +47,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
             // dbg('running handler for server message', response.requestType, response);
             return await event.handler(response, this);
         } else {
-            console.warn('received unmatched server message!', response);
+            log.warn('socket', 'received unmatched server message!', response);
         }
     }
 

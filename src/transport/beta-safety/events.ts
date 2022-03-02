@@ -25,7 +25,7 @@ export const censoredImageEvent: SocketEvent<void> = {
         if (parseInt(response.status) === 200 || parseInt(response.status) === 304) {
             url = response.url;
         } else {
-            console.log(`error image response`, response);
+            // console.log(`error image response`, response);
             errorMsg = response.url;
             url = '';
             // we don't have an NSFW error screen yet

@@ -22,6 +22,7 @@
     },
     "type": "module",
     "dependencies": {
+        "missionlog": "^1.8.3",
         "sockette": "^2.0.6",
         "strongly-typed-events": "^2.1.14"
     }

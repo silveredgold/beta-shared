@@ -1,5 +1,6 @@
 
 
+import { log } from "missionlog";
 import Sockette from "sockette";
 import { EventDispatcher } from "ste-events";
 
@@ -68,14 +69,14 @@ export abstract class WebSocketTransportClient {
             const onClose = (e): any => {
                 if (e.code !== 4999 && e.code !== 1000) {
                     debugger;
-                    console.error('Socket is closed.', e.code, e.reason, e.wasClean);
+                    log.error('socket', 'Socket is closed.', e.code, e.reason, e.wasClean);
                     if (!this._requestId) {
                         this._onPublishMessage.dispatch(this, { msg: 'socketClosed' });
                     }
                 }
             };
             const onError = function (ev) {
-                console.error('Socket encountered error: Closing socket');
+                log.error('socket', 'Socket encountered error: Closing socket');
             };
             const onMessage = (event) => {
                 const response = JSON.parse(event.data);
@@ -91,16 +92,16 @@ export abstract class WebSocketTransportClient {
                 onopen: onOpen,
                 onmessage: onMessage,
                 onreconnect: (e) => {
-                    console.warn('reconnecting socket!');
+                    log.warn('socket', 'reconnecting socket!');
                     this._onPublishMessage.dispatch(this, { msg: 'socketReconnect' });
                 },
-                onmaximum: (e) => console.error('Socket reconnection failed!', e),
+                onmaximum: (e) => log.error('socket', 'Socket reconnection failed!', e),
                 onclose: onClose,
                 onerror: onError
             });
             return webSocket;
         } catch (e: any) {
-            console.warn("Failed to connect to WebSocket! Cannot connect to the target endpoint.", e.toString(), e);
+            log.warn('socket', "Failed to connect to WebSocket! Cannot connect to the target endpoint.", e.toString(), e);
         }
     }
 
