@@ -12,7 +12,7 @@ export interface EventPayload {
 export abstract class WebSocketTransportClient {
 
     protected _requestId?: string;
-    private host: string;
+    protected host: string;
     /**
      *
      */
@@ -58,7 +58,7 @@ export abstract class WebSocketTransportClient {
     }
 
 
-    private connectTo = (host?: string): Sockette | undefined => {
+    protected connectTo = (host?: string): Sockette | undefined => {
         host ??= WebSocketTransportClient.defaultHost;
         try {
             const onOpen = () => {
@@ -68,7 +68,6 @@ export abstract class WebSocketTransportClient {
             };
             const onClose = (e): any => {
                 if (e.code !== 4999 && e.code !== 1000) {
-                    debugger;
                     log.error('socket', 'Socket is closed.', e.code, e.reason, e.wasClean);
                     if (!this._requestId) {
                         this._onPublishMessage.dispatch(this, { msg: 'socketClosed' });

@@ -1,10 +1,11 @@
 import { SocketEvent } from "./events";
-import { ActionPayload, ICensorBackend } from "..";
+import { ActionPayload, ConnectionStatus, ICensorBackend } from "..";
 import { IPreferences, toRaw } from "#/preferences";
 import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { WebSocketTransportClient } from "../webSocketTransportClient";
 import { log } from "missionlog";
+import Sockette from "sockette";
 
 export class BetaSafetyBackendClient extends WebSocketTransportClient implements ICensorBackend {
     
@@ -29,6 +30,51 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     constructor(socketEvents: SocketEvent<any>[], requestId?: string, host?: string) {
         super(requestId, host);
         this.messageEvents.push(...socketEvents);
+    }
+
+    async check(host?: string): Promise<ConnectionStatus> {
+        const targetHost = host ?? this.host;
+        try {
+            var result = await new Promise<ConnectionStatus>((resolve, reject) => {
+                var status: ConnectionStatus = { available: false };
+                try {
+                    const onOpen = () => {
+                        status.available = true;
+                        resolve(status);
+                    };
+                    const onClose = (e): any => {
+                        if (e.code !== 4999 && e.code !== 1000) {
+                            log.warn('socket', 'Connection check socket is closed.', e.code, e.reason, e.wasClean);
+                        }
+                    };
+                    const onMax = (e) => {
+                        log.error('socket', 'Socket reconnection failed!', e)
+                        reject();
+                    }
+                    const onError = function (ev) {
+                        log.error('socket', 'Connection check socket errored out!', ev);
+                    };
+                    const webSocket = new Sockette(targetHost, {
+                        timeout: 10,
+                        maxAttempts: 3,
+                        onopen: onOpen,
+                        onreconnect: (e) => {
+                            log.warn('socket', 'reconnecting socket!');
+                            this._onPublishMessage.dispatch(this, { msg: 'socketReconnect' });
+                        },
+                        onmaximum: onMax,
+                        onclose: onClose,
+                        onerror: onError
+                    });
+                } catch (e: any) {
+                    log.warn('socket', "Failed to check status via WebSocket! Cannot connect to the target endpoint.", e.toString(), e);
+                    reject(e);
+                }
+            });
+            return result;
+        } catch {
+            return {available: false}
+        }
     }
 
     async cancelRequests(request: CancelRequest): Promise<void> {
