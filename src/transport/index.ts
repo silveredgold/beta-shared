@@ -34,6 +34,13 @@ export type CancelRequest = {
     srcId?: string
 };
 
+export type ConnectionStatus = {
+    available: boolean,
+    message?: string,
+    version?: string,
+    [x: string]: unknown;
+}
+
 export interface ICensorBackend {
     requestId?: string;
     censorImage(request: ImageCensorRequest): Promise<ImageCensorResponse|undefined>;
@@ -46,6 +53,7 @@ export interface ICensorBackend {
     getAvailableAssets(assetType: AssetType): Promise<string[]|undefined>;
     readonly onUpdate: ISimpleEvent<ActionPayload>;
     cancelRequests(request: CancelRequest): Promise<void>;
+    check(host?: string): Promise<ConnectionStatus>;
 }
 
 export type StatisticsData = {
