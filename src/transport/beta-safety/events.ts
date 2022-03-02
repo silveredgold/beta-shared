@@ -102,3 +102,12 @@ const parseRawStatistics = (rawObj: string) => {
     }
     return out;
 }
+
+export const defaultMessageEvents : SocketEvent<any>[] = 
+    [
+        placeholderStickerEvent,
+        preferencesEvent,
+        censoredImageEvent,
+        statisticsEvent,
+        resetStatisticsEvent
+    ];

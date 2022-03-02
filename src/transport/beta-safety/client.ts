@@ -1,4 +1,4 @@
-import { censoredImageEvent, placeholderStickerEvent, preferencesEvent, resetStatisticsEvent, SocketEvent, statisticsEvent } from "./events";
+import { SocketEvent } from "./events";
 import { ActionPayload, ICensorBackend } from "..";
 import { IPreferences, toRaw } from "#/preferences";
 import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
