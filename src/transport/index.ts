@@ -46,12 +46,11 @@ export interface ICensorBackend {
     censorImage(request: ImageCensorRequest): Promise<ImageCensorResponse|undefined>;
     readonly onImageCensored: IEvent<ICensorBackend, ImageCensorResponse>;
     getRemotePreferences(): Promise<Partial<IPreferences>|undefined>;
-    readonly onReceivePreferences: IEvent<ICensorBackend, Partial<IPreferences>>;
     updateRemotePreferences(preferences: IPreferences): Promise<boolean>;
     getStatistics(): Promise<StatisticsData|undefined>;
     resetStatistics(): Promise<boolean>;
     getAvailableAssets(assetType: AssetType): Promise<string[]|undefined>;
-    readonly onUpdate: ISimpleEvent<ActionPayload>;
+    // readonly onUpdate: ISimpleEvent<ActionPayload>;
     cancelRequests(request: CancelRequest): Promise<void>;
     check(host?: string): Promise<ConnectionStatus>;
 }

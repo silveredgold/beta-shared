@@ -130,9 +130,13 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     }
     getRemotePreferences(): Promise<Partial<IPreferences|undefined>> {
         return new Promise<Partial<IPreferences|undefined>>((resolve, reject) => {
+            const timeout = setTimeout(() => {
+                reject('timeout!');
+            }, 5000)
             const unsub = this._onFetchPreferences.subscribe((sender, payload) => {
                 if (payload) {
                     unsub();
+                    clearTimeout(timeout);
                     resolve(payload);
                 } else {
                     reject('no preferences received!');
@@ -141,12 +145,9 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
             this.sendObj({msg: 'getUserPreferences', version: this._version});
         });
     }
-    get onReceivePreferences(): IEvent<ICensorBackend, Partial<IPreferences>> {
-        return this._onFetchPreferences.asEvent();
-    }
-    get onUpdate() {
-        return this._onUpdate.asEvent();
-    }
+    // get onUpdate() {
+    //     return this._onUpdate.asEvent();
+    // }
     async updateRemotePreferences(preferences: IPreferences): Promise<boolean> {
         this.sendObj({
             version: this._version,
@@ -157,8 +158,12 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     }
     getStatistics(): Promise<StatisticsData | undefined> {
         return new Promise<StatisticsData>((resolve, reject) => {
+            const timeout = setTimeout(() => {
+                reject('timeout!');
+            }, 5000);
             this._onReceiveStatistics.one((sender, args) => {
                 if (args) {
+                    clearTimeout(timeout);
                     resolve(args)
                 } else {
                     reject('but how');
@@ -195,7 +200,4 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
                 return Promise.resolve(undefined);
         }
     }
-
-    
-
 }

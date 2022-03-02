@@ -120,7 +120,7 @@ export const toBetaSafety = (prefs: IPreferences): Partial<BetaSafetyPreferences
         ebreastslevel: prefs.exposed.Breasts.level.toFixed(1),
         ecock: `ecock${parseType(prefs.exposed.Cock.method)}`,
         ecocklevel: prefs.exposed.Cock.level.toFixed(1),
-        efeet: `efeet${parseType(prefs.exposed.Cock.method)}`,
+        efeet: `efeet${parseType(prefs.exposed.Feet.method)}`,
         efeetlevel: prefs.exposed.Feet.level.toFixed(1),
         epits: `epits${parseType(prefs.exposed.Pits.method)}`,
         epitslevel: prefs.exposed.Pits.level.toFixed(1),
@@ -176,6 +176,8 @@ function parseType(type: CensorType): string {
             return "pix";
         case CensorType.None:
             return "nothing";
+        case CensorType.Caption:
+            return "pixplus";
         default:
             return type.toLowerCase();
     }
