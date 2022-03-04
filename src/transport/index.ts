@@ -56,7 +56,13 @@ export interface ICensorBackend {
 }
 
 export type StatisticsData = {
-    [domain: string]: {safe: number, softcore: number, hardcore: number};
+    [domain: string]: DomainStatistics
+}
+
+export type DomainStatistics = {
+    safe: number, 
+    censored: number, 
+    categories: {[key: string]: number}
 }
 
 export type AssetType = 'stickers'|'error'|'other';
