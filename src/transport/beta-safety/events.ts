@@ -99,7 +99,14 @@ const parseRawStatistics = (rawObj: string) => {
     for (const site of siteObjs.filter(v => !!v)) {
         const siteName = site.split('=')[0];
         const [safe, hardcore, softcore] = site.split('=')[1].split(';');
-        out[siteName] = { safe: +safe, hardcore: +hardcore, softcore: +softcore };
+        out[siteName] = {
+            safe: +safe, 
+            censored: (+hardcore) + (+softcore),
+            categories: {
+                hardcore: +hardcore, 
+                softcore: +softcore
+            }
+        };
     }
     return out;
 }
