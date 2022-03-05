@@ -37,7 +37,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
         const targetHost = host ?? this.host;
         try {
             var result = await new Promise<ConnectionStatus>((resolve, reject) => {
-                var status: ConnectionStatus = { available: false };
+                var status: ConnectionStatus = { available: false, name: 'Beta Safety' };
                 try {
                     const onOpen = () => {
                         status.available = true;
@@ -74,7 +74,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
             });
             return result;
         } catch {
-            return {available: false}
+            return {available: false, name: 'Beta Safety'}
         }
     }
 

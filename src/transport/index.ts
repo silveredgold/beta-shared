@@ -36,6 +36,7 @@ export type CancelRequest = {
 
 export type ConnectionStatus = {
     available: boolean,
+    name: string,
     message?: string,
     version?: string,
     [x: string]: unknown;

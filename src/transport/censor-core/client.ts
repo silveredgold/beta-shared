@@ -37,10 +37,10 @@ export class CensorCoreRestClient implements ICensorBackend {
         const targetHost = host ?? this.host;
         var result = await fetch(targetHost + (targetHost.endsWith('/') ? '' : '/') + "info");
         if (result.status >= 400) {
-            return {available: false}
+            return {available: false, name: 'CensorCore'}
         } else {
             var json = await result.json();
-            return {available: true, version: json["version"]};
+            return {available: true, version: json["version"], name: 'CensorCore'};
         }
     }
 
