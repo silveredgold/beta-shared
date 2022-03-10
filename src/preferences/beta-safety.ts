@@ -142,7 +142,7 @@ export const toBetaSafety = (prefs: IPreferences): Partial<BetaSafetyPreferences
 }
 
 function getCensorObj(rawPrefs: BetaSafetyPreferences, key: string): {method: CensorType, level: number} {
-    return {method: rawPrefs[key].replace(key, "") as CensorType, level: +rawPrefs[key + "level"]};
+    return {method: parseBackendType(rawPrefs[key].replace(key, "")), level: +rawPrefs[key + "level"]};
 }
 
 function parseModus(rawType: string): OperationMode {
@@ -180,5 +180,20 @@ function parseType(type: CensorType): string {
             return "pixplus";
         default:
             return type.toLowerCase();
+    }
+}
+
+function parseBackendType(type: string): CensorType {
+    switch (type) {
+        case "bb":
+            return CensorType.BlackBox;
+        case "pix":
+            return CensorType.Pixels;
+        case "nothing":
+            return CensorType.None;
+        case "pixplus":
+            return CensorType.Caption;
+        default:
+            return toTitleCase(type) as CensorType;
     }
 }

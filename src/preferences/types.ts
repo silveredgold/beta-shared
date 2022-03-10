@@ -14,8 +14,8 @@ export interface IPreferences {
     covered: BodyCensorModes;
     otherCensoring: {
         femaleEyes: 'None'|'Box'|'Sticker';
-        femaleFace: {method: CensorType, level: number},
-        maleFace: {method: CensorType, level: number}
+        femaleFace: CensorMode,
+        maleFace: CensorMode
     }
     videoCensorLevel: number;
     videoCensorMode: "Block"|"Blur"|"Allow";
@@ -48,7 +48,7 @@ export type SubliminalOptions = {
 export type CensorMode = {method: CensorType, level: number};
 
 export type BodyCensorModes = {
-    Pits: {method: CensorType, level: number},
+    Pits: CensorMode,
     Breasts: CensorMode,
     Belly: CensorMode,
     Ass: CensorMode,

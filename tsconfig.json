@@ -8,6 +8,7 @@
         "declaration": true,
         "moduleResolution": "node",
         "experimentalDecorators": true,
+        "isolatedModules": true,
         "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,

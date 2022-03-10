@@ -7,6 +7,7 @@ import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, Can
 import { WebSocketTransportClient } from "../webSocketTransportClient";
 import { log } from "missionlog";
 import Sockette from "sockette";
+import { scrambleImage } from "./scrambler";
 
 export class BetaSafetyBackendClient extends WebSocketTransportClient implements ICensorBackend {
     
@@ -111,6 +112,14 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     requestId?: string | undefined;
     async censorImage(request: ImageCensorRequest): Promise<ImageCensorResponse | undefined> {
         if (request.requestData) {
+            if (request.url.startsWith('data:')) {
+                try {
+                const orig = request.url;
+                const dataType = request.url.split(';')[0].split(':')[1];
+                request.url = await scrambleImage(request.url, dataType);
+                console.log('scrambled encoded data URI', orig.slice(24,74), request.url.slice(24,74));
+                } catch {}
+            }
             this.sendObj({
                 version: this._version,
                 msg: request.force ? "redoCensor" : "censorImage",
@@ -201,3 +210,4 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
         }
     }
 }
+

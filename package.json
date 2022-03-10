@@ -1,6 +1,6 @@
 {
     "name": "@silveredgold/beta-shared",
-    "version": "0.0.1-alpha14",
+    "version": "0.0.1-alpha15",
     "description": "The shared types and functions used by Beta Protection.",
     "main": "./index.js",
     "types": "./index.d.ts",
@@ -23,6 +23,7 @@
     "type": "module",
     "dependencies": {
         "cross-fetch": "^3.1.5",
+        "image-js": "^0.33.1",
         "missionlog": "^1.8.3",
         "sockette": "^2.0.6",
         "strongly-typed-events": "^2.1.14"
