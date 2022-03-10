@@ -13,6 +13,7 @@ export type ImageCensorRequest = {
     id: string,
     force: boolean,
     url: string,
+    srcUrl?: string,
     srcId: string|number|undefined,
     preferences: IPreferences,
     requestData?: {[key: string]: any},

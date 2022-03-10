@@ -112,18 +112,23 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     requestId?: string | undefined;
     async censorImage(request: ImageCensorRequest): Promise<ImageCensorResponse | undefined> {
         if (request.requestData) {
-            if (request.url.startsWith('data:')) {
-                try {
-                const orig = request.url;
-                const dataType = request.url.split(';')[0].split(':')[1];
-                request.url = await scrambleImage(request.url, dataType);
-                console.log('scrambled encoded data URI', orig.slice(24,74), request.url.slice(24,74));
-                } catch {}
-            }
+            // if (request.url.startsWith('data:')) {
+            //     try {
+            //     const orig = request.url;
+            //     const dataType = request.url.split(';')[0].split(':')[1];
+            //     request.url = await scrambleImage(request.url, dataType);
+            //     console.log('scrambled encoded data URI', orig.slice(24,74), request.url.slice(24,74));
+            //     } catch {}
+            // }
+            // this is just too unreliable: you really need to fuck with the image to make the encoded data
+            // different enough not to trip up the server.
+            const url = request.url.startsWith('data:') && request.srcUrl !== undefined
+                ? request.srcUrl
+                : request.url;
             this.sendObj({
                 version: this._version,
                 msg: request.force ? "redoCensor" : "censorImage",
-                url: request.url,
+                url: url,
                 tabid: +request.srcId!,
                 id: request.id,
                 priority: request.requestData["priority"] ?? 1,
