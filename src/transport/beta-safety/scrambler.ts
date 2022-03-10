@@ -21,7 +21,11 @@ export class ImageScrambler {
 
 export const scrambleImage = async (url: string, destType: string) => {
     var img = await Image.load(url);
-    var crop = img.crop({x: 1, y: 1})
+    var crop = img.crop({x: getRandomInt(0,4), y: getRandomInt(0,4)})
     var result = crop.toDataURL(destType);
     return result;
+}
+
+function getRandomInt (min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
