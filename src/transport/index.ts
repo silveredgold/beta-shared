@@ -31,7 +31,7 @@ export type ImageCensorResponse = {
 }
 
 export type CancelRequest = {
-    requestId?: string,
+    requestId?: string[],
     srcId?: string
 };
 
