@@ -1,13 +1,12 @@
-import { SocketEvent } from "./events";
 import { ActionPayload, ConnectionStatus, ICensorBackend } from "..";
 import { IPreferences } from "#/preferences";
 import { toBetaSafety } from "#/preferences/beta-safety";
-import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
+import { EventDispatcher, SimpleEventDispatcher } from "strongly-typed-events";
+import type {IEvent} from "strongly-typed-events"
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { WebSocketTransportClient } from "../webSocketTransportClient";
 import { log } from "missionlog";
 import Sockette from "sockette";
-import { scrambleImage } from "./scrambler";
 
 export class BetaSafetyBackendClient extends WebSocketTransportClient implements ICensorBackend {
     
@@ -216,3 +215,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     }
 }
 
+export type SocketEvent<Type> = {
+    event: string;
+    handler: (message: any, sender: BetaSafetyBackendClient) => Promise<Type>
+}

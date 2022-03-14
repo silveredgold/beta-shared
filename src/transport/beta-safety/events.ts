@@ -1,12 +1,7 @@
 import { IPreferences } from "#/preferences";
 import { createPreferencesFromBackend, BetaSafetyPreferences } from "#/preferences/beta-safety";
 import { StatisticsData } from "..";
-import { BetaSafetyBackendClient } from "./client";
-
-export type SocketEvent<Type> = {
-    event: string;
-    handler: (message: any, sender: BetaSafetyBackendClient) => Promise<Type>
-}
+import { SocketEvent } from "./client";
 
 export const placeholderStickerEvent: SocketEvent<void> = {
     event: 'detectPlaceholdersAndStickers',
