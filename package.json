@@ -1,6 +1,6 @@
 {
     "name": "@silveredgold/beta-shared",
-    "version": "0.0.1-alpha21",
+    "version": "0.0.1-alpha22",
     "description": "The shared types and functions used by Beta Protection.",
     "main": "./index.js",
     "types": "./index.d.ts",
