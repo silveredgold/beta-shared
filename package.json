@@ -25,6 +25,7 @@
         "cross-fetch": "^3.1.5",
         "missionlog": "^1.8.3",
         "sockette": "^2.0.6",
-        "strongly-typed-events": "^2.1.16"
+        "@silveredgold/ste-events": "^2.1.16-alpha1",
+        "@silveredgold/ste-simple-events": "^2.1.16-alpha1"
     }
 }

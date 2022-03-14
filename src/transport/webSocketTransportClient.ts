@@ -2,7 +2,7 @@
 
 import { log } from "missionlog";
 import Sockette from "sockette";
-import { EventDispatcher } from "ste-events";
+import { EventDispatcher } from "@silveredgold/ste-events";
 
 export interface EventPayload {
     msg: string;

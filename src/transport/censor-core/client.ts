@@ -2,7 +2,8 @@
 import { ActionPayload, ConnectionStatus, ICensorBackend } from "..";
 import { IPreferences } from "#/preferences";
 import { toBetaSafety } from "#/preferences/beta-safety";
-import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
+import { EventDispatcher, IEvent } from "@silveredgold/ste-events";
+import { SimpleEventDispatcher } from "@silveredgold/ste-simple-events";
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { log } from "missionlog";
 import fetch from "cross-fetch";

@@ -1,5 +1,5 @@
 import { IPreferences } from "#/preferences";
-import type { IEvent, ISimpleEvent } from "strongly-typed-events";
+import type { IEvent } from "@silveredgold/ste-events";
 
 export type ActionEntity = 'statistics'|'preferences'|'stickers';
 
