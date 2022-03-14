@@ -1,4 +1,4 @@
-import { IPreferences, OperationMode } from "./preferences";
+import { IPreferences, OperationMode } from "./preferences/types";
 
 export function hashCode(str: string) {
   let hash = 0, i, chr;
