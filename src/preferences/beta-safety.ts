@@ -86,7 +86,8 @@ export function createPreferencesFromBackend(raw: BetaSafetyPreferences): IPrefe
                         : 'None'
               })(),
             femaleFace: getCensorObj(raw, "fface"),
-            maleFace: getCensorObj(raw, "mface")
+            maleFace: getCensorObj(raw, "mface"),
+            femaleMouth: 'None'
         },
         rescaleLevel: +raw.rescalinglevel,
         saveLocalCopy: raw.localCopy === 'true',

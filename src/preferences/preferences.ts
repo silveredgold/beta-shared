@@ -24,7 +24,8 @@ export const defaultPrefs: IPreferences = {
     otherCensoring: {
         femaleEyes: 'None',
         femaleFace: {method: CensorType.Pixels, level: 1.0},
-        maleFace: {method: CensorType.None, level: 1.0}
+        maleFace: {method: CensorType.None, level: 1.0},
+        femaleMouth: 'None'
     },
     mode: OperationMode.OnDemand,
     videoCensorLevel: 2,

@@ -14,6 +14,7 @@ export interface IPreferences {
     covered: BodyCensorModes;
     otherCensoring: {
         femaleEyes: 'None'|'Box'|'Sticker';
+        femaleMouth: 'None'|'Box'|'Sticker';
         femaleFace: CensorMode,
         maleFace: CensorMode
     }
