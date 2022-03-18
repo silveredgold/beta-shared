@@ -4,28 +4,28 @@ import { toTitleCase } from "../util";
 
 export const defaultPrefs: IPreferences = {
     exposed: {
-        Pits: {method: CensorType.None, level: 1.0},
-        Breasts: {method: CensorType.Caption, level: 5},
-        Belly: {method: CensorType.None, level: 1.9},
-        Ass: {method: CensorType.Pixels, level: 5},
+        Pits: {method: CensorType.None, level: 5},
+        Breasts: {method: CensorType.Pixels, level: 10},
+        Belly: {method: CensorType.None, level: 4},
+        Ass: {method: CensorType.Pixels, level: 10},
         Cock: {method: CensorType.None, level: 1.0},
-        Feet: {method: CensorType.None, level: 1.9},
-        Pussy: {method: CensorType.Sticker, level: 7.4}
+        Feet: {method: CensorType.Blur, level: 10},
+        Pussy: {method: CensorType.Sticker, level: 12}
     },
     covered: {
-        Pits: {method: CensorType.None, level: 1.1},
-        Breasts: {method: CensorType.Caption, level: 5},
-        Belly: {method: CensorType.None, level: 1.9},
-        Ass: {method: CensorType.Pixels, level: 5},
-        Cock: {method: CensorType.None, level: 1.0},
-        Feet: {method: CensorType.None, level: 1.9},
-        Pussy: {method: CensorType.Sticker, level: 7.4}
+        Pits: {method: CensorType.None, level: 5},
+        Breasts: {method: CensorType.Blur, level: 10},
+        Belly: {method: CensorType.None, level: 2},
+        Ass: {method: CensorType.Blur, level: 10},
+        Cock: {method: CensorType.None, level: 2},
+        Feet: {method: CensorType.None, level: 2},
+        Pussy: {method: CensorType.Pixels, level: 8}
     },
     otherCensoring: {
-        femaleEyes: 'None',
-        femaleFace: {method: CensorType.Pixels, level: 1.0},
-        maleFace: {method: CensorType.None, level: 1.0},
-        femaleMouth: 'None'
+        femaleEyes: {method: CensorType.BlackBox, level: 10},
+        femaleFace: {method: CensorType.None, level: 5},
+        maleFace: {method: CensorType.None, level: 5},
+        femaleMouth: {method: CensorType.None, level: 5}
     },
     mode: OperationMode.OnDemand,
     videoCensorLevel: 2,
@@ -34,8 +34,8 @@ export const defaultPrefs: IPreferences = {
     saveLocalCopy: false,
     obfuscateImages: false,
     autoAnimate: false,
-    enabledPlaceholders: ["Loser"],
-    enabledStickers: ["Loser"],
+    enabledPlaceholders: [],
+    enabledStickers: [],
     subliminal: {
         enabled: false,
         delay: 4000,

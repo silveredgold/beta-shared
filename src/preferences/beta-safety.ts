@@ -79,15 +79,16 @@ export function createPreferencesFromBackend(raw: BetaSafetyPreferences): IPrefe
         otherCensoring: {
             femaleEyes: (() => {
                 const rawEyes = raw.feyes.replace("feyes", "");
-                return rawEyes === 'bb' 
-                    ? 'Box'
+                const method = rawEyes === 'bb' 
+                    ? CensorType.BlackBox
                     : rawEyes === 'sticker'
-                        ? 'Sticker'
-                        : 'None'
+                        ? CensorType.Caption
+                        : CensorType.None;
+                return {method, level: 5};
               })(),
             femaleFace: getCensorObj(raw, "fface"),
             maleFace: getCensorObj(raw, "mface"),
-            femaleMouth: 'None'
+            femaleMouth: {method: CensorType.None, level: 5}
         },
         rescaleLevel: +raw.rescalinglevel,
         saveLocalCopy: raw.localCopy === 'true',
@@ -127,7 +128,7 @@ export const toBetaSafety = (prefs: IPreferences): Partial<BetaSafetyPreferences
         epitslevel: prefs.exposed.Pits.level.toFixed(1),
         epussy: `epussy${parseType(prefs.exposed.Pussy.method)}`,
         epussylevel: prefs.exposed.Pussy.level.toFixed(1),
-        feyes: `feyes${prefs.otherCensoring.femaleEyes === 'Box' ? 'bb' : prefs.otherCensoring.femaleEyes === 'Sticker' ? 'sticker' : 'nothing'}`,
+        feyes: `feyes${toSupportedEyeType(prefs.otherCensoring.femaleEyes.method)}`,
         fface: `fface${parseType(prefs.otherCensoring.femaleFace.method)}`,
         ffacelevel: prefs.otherCensoring.femaleFace.level.toFixed(1),
         localCopy: prefs.saveLocalCopy.toString(),
@@ -139,6 +140,18 @@ export const toBetaSafety = (prefs: IPreferences): Partial<BetaSafetyPreferences
         video: `video${prefs.videoCensorMode}`,
         videolevel: prefs.videoCensorLevel.toFixed(0),
         selectedStickers: prefs.enabledStickers.length ? prefs.enabledStickers : Object.values(prefs.enabledStickers as any)
+    }
+}
+
+function toSupportedEyeType(type: CensorType): string {
+    switch (type) {
+        case CensorType.BlackBox:
+            return 'bb';
+        case CensorType.Caption:
+            return 'sticker';
+        default:
+            return 'nothing';
+            
     }
 }
 
