@@ -51,7 +51,7 @@ export function createPreferencesFromBackend(raw: BetaSafetyPreferences): IPrefe
 
     return {
         ...defaultPrefs,
-        allowList: raw["whitelist"] as string[] ?? [],
+        // allowList: raw["whitelist"] as string[] ?? [],
         autoAnimate: raw.animate === 'true',
         covered: {
             Ass: getCensorObj(raw, "cass"),
@@ -71,9 +71,9 @@ export function createPreferencesFromBackend(raw: BetaSafetyPreferences): IPrefe
             Pits: getCensorObj(raw, "epits"),
             Pussy: getCensorObj(raw, "epussy")
         },
-        enabledPlaceholders: raw.selectedPlaceholders,
+        // enabledPlaceholders: raw.selectedPlaceholders,
         enabledStickers: raw.selectedStickers,
-        forceList: raw["blacklist"] ?? [],
+        // forceList: raw["blacklist"] ?? [],
         // mode: parseModus(raw.modus),
         obfuscateImages: raw.obfuscate === "true",
         otherCensoring: {

@@ -65,26 +65,6 @@ export function generateUUID() { // Public Domain/MIT
   });
 }
 
-export const shouldCensor = (prefs: IPreferences, url: string): boolean => {
-  if (prefs?.mode) {
-    // let prefs = confPrefs["preferences"] as IPreferences;
-    const mode = prefs.mode;
-    const whitelist = prefs.allowList?.length ? prefs.allowList : [];
-    const blacklist = prefs.forceList?.length ? prefs.forceList : [];
-    const siteAllowed = whitelist.map(l => l.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").toLowerCase()).some(wle => url.includes(wle));
-    if (siteAllowed || mode == OperationMode.Disabled) {
-      return false;
-    } else if (mode == OperationMode.OnDemand) {
-      const siteForced = blacklist.map(l => l.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").toLowerCase()).some(wle => url.includes(wle));
-      return siteForced;
-    } else {
-      return true;
-    }
-  } else {
-    return false;
-  }
-}
-
 export const getDomain = (location: string, prefs?: IPreferences | boolean) => {
   return (typeof prefs === 'boolean' && prefs) || (prefs && prefs.hideDomains)
     ? "unknown.tld"

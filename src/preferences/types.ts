@@ -24,12 +24,12 @@ export interface IPreferences {
     saveLocalCopy: boolean;
     obfuscateImages: boolean;
     autoAnimate: boolean;
-    enabledPlaceholders: string[];
+    // enabledPlaceholders: string[];
     enabledStickers: string[];
-    subliminal: SubliminalOptions;
-    allowList: string[];
-    forceList: string[];
-    errorMode: "subtle"|"normal";
+    // subliminal: SubliminalOptions;
+    // allowList: string[];
+    // forceList: string[];
+    // errorMode: "subtle"|"normal";
     hideDomains: boolean;
 }
 
