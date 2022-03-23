@@ -43,6 +43,6 @@ export const defaultPrefs: IPreferences = {
     // },
     // allowList: [],
     // forceList: [],
-    // errorMode: 'normal',
+    errorMode: 'normal',
     hideDomains: true
 }

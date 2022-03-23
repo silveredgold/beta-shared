@@ -29,7 +29,7 @@ export interface IPreferences {
     // subliminal: SubliminalOptions;
     // allowList: string[];
     // forceList: string[];
-    // errorMode: "subtle"|"normal";
+    errorMode: "subtle"|"normal"|"none";
     hideDomains: boolean;
 }
 
