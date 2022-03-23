@@ -1,9 +1,9 @@
-export interface IOverride {
+export interface IOverride<T extends IPreferences> {
     id: string;
     key: string;
     allowedModes: OperationMode[];
     hash?: number;
-    preferences: Partial<IPreferences>;
+    preferences: Partial<T>;
     activatedTime?: number;
     minimumTime?: number;
 }
