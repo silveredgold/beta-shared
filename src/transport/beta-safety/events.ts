@@ -1,5 +1,5 @@
-import { IPreferences } from "#/preferences";
-import { createPreferencesFromBackend, BetaSafetyPreferences } from "#/preferences/beta-safety";
+import { IPreferences } from "../../preferences";
+import { createPreferencesFromBackend, BetaSafetyPreferences } from "../../preferences/beta-safety";
 import { StatisticsData } from "..";
 import { SocketEvent } from "./client";
 

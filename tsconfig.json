@@ -17,11 +17,6 @@
         "noImplicitAny": false,
         "preserveConstEnums": true,
         "outDir": "./dist/",
-        "paths": {
-            "#/*": [
-                "./src/*"
-            ]
-        },
         "lib": [
             "ES2020"
         ]

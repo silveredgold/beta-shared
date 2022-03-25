@@ -1,6 +1,6 @@
 
 
-import { IPreferences } from "#/preferences";
+import { IPreferences } from "./types";
 import { CensorMode } from "./types";
 
 export type NudeNetPreferences = {

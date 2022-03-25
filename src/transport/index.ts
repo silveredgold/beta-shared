@@ -1,4 +1,4 @@
-import { IPreferences } from "#/preferences";
+import { IPreferences } from "../preferences";
 import type { IEvent } from "@silveredgold/ste-events";
 
 export type ActionEntity = 'statistics'|'preferences'|'stickers';

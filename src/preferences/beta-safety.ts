@@ -1,5 +1,7 @@
-import { IPreferences, defaultPrefs, CensorType, OperationMode } from "#/preferences";
+
 import { toTitleCase } from "..";
+import { defaultPrefs } from "./preferences";
+import { CensorType, IPreferences, OperationMode } from "./types";
 
 export type BetaSafetyPreferences = {
     video: string;
