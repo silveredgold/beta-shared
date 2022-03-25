@@ -1,8 +1,7 @@
 // import { SocketEvent } from "./events";
 import { ActionPayload, ConnectionStatus, ICensorBackend } from "..";
 import type { IPreferences } from "../../preferences";
-import { EventDispatcher, IEvent } from "@silveredgold/ste-events";
-import { SimpleEventDispatcher } from "@silveredgold/ste-simple-events";
+import { EventDispatcher, IEvent, SimpleEventDispatcher } from "strongly-typed-events";
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { toNudeNet } from "../../preferences/nudenet";
 import { fetch } from "cross-fetch";

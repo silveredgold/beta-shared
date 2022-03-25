@@ -1,9 +1,7 @@
 import { ActionPayload, ConnectionStatus, ICensorBackend } from "..";
 import { IPreferences } from "../../preferences";
 import { toBetaSafety } from "../../preferences/beta-safety";
-import { EventDispatcher } from "@silveredgold/ste-events";
-import type {IEvent} from "@silveredgold/ste-events";
-import { SimpleEventDispatcher } from "@silveredgold/ste-simple-events";
+import { EventDispatcher, SimpleEventDispatcher, IEvent } from "strongly-typed-events";
 import { ImageCensorRequest, ImageCensorResponse, StatisticsData, AssetType, CancelRequest } from "..";
 import { WebSocketTransportClient } from "../webSocketTransportClient";
 import { log } from "missionlog";
