@@ -143,7 +143,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     getRemotePreferences(): Promise<Partial<IPreferences|undefined>> {
         return new Promise<Partial<IPreferences|undefined>>((resolve, reject) => {
             const timeout = setTimeout(() => {
-                reject('timeout!');
+                reject('timeout getting preferences!');
             }, 5000)
             const unsub = this._onFetchPreferences.subscribe((sender, payload) => {
                 if (payload) {
@@ -171,7 +171,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
     getStatistics(): Promise<StatisticsData | undefined> {
         return new Promise<StatisticsData>((resolve, reject) => {
             const timeout = setTimeout(() => {
-                reject('timeout!');
+                reject('timeout getting statistics info!');
             }, 5000);
             this._onReceiveStatistics.one((sender, args) => {
                 if (args) {
@@ -206,7 +206,7 @@ export class BetaSafetyBackendClient extends WebSocketTransportClient implements
                             reject('but how');
                         }
                     })
-                    this.sendObj({msg: 'getStatistics', version: this._version});
+                    this.sendObj({msg: 'detectPlaceholdersAndStickers', version: this._version});
                 });
             default:
                 return Promise.resolve(undefined);
