@@ -26,7 +26,6 @@ export interface IPreferences {
     autoAnimate: boolean;
     // enabledPlaceholders: string[];
     enabledStickers: string[];
-    // subliminal: SubliminalOptions;
     // allowList: string[];
     // forceList: string[];
     errorMode: "subtle"|"normal"|"none";
@@ -40,11 +39,11 @@ export enum OperationMode {
     Enabled = "enabled"
 }
 
-export type SubliminalOptions = {
-    enabled: boolean;
-    delay: number;
-    duration: number;
-}
+// export type SubliminalOptions = {
+//     enabled: boolean;
+//     delay: number;
+//     duration: number;
+// }
 
 export type CensorMode = {method: CensorType, level: number};
 
