@@ -45,10 +45,19 @@ export function humanFileSize(bytes: number, si: boolean = false, dp: number = 1
   return bytes.toFixed(dp) + ' ' + units[u];
 }
 
+/**
+ * Gets a random entry from a collection of objects.
+ * @param src The source collection to draw from
+ * @returns A single entry from the collection.
+ */
 export function getRandom<Type>(src: Type[]): Type {
   return src[Math.floor(Math.random() * src.length)]
 }
 
+/**
+ * Generates and returns a new random UUID. 
+ * @returns A UUID in "G" string form.
+ */
 export function generateUUID() { // Public Domain/MIT
   let d = new Date().getTime();//Timestamp
   let d2 = new Date().getMilliseconds() || 0;//Time in microseconds since page-load or 0 if unsupported
@@ -65,18 +74,36 @@ export function generateUUID() { // Public Domain/MIT
   });
 }
 
+/**
+ * Gets the domain name for the current request location.
+ * @param location The request location.
+ * @param prefs The user preferences for the current request.
+ * @returns A domain name for use in statistics or logs.
+ * @remarks
+ * If the current user preferences request hiding domains, this will return a 
+ * valid, but nonsensical domain name.
+ */
 export const getDomain = (location: string, prefs?: IPreferences | boolean) => {
   return (typeof prefs === 'boolean' && prefs) || (prefs && prefs.hideDomains)
     ? "unknown.tld"
     : location.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
 }
 
-
+/**
+ * Checks whether the given string is a valid HTTP(S), Data, or File URI.
+ * @param url The URL to test
+ * @returns `true` if the URL is a HTTP/HTTPS/Data/File URI, otherwise `false`
+ */
 export function isValidUrl(url: string) {
   const http = (url.includes("http://") || url.includes("https://") || url.includes("data:image/") || url.includes("file://"));
   return http;
 }
 
+/**
+ * Converts a string to Title Case.
+ * @param str The input string.
+ * @returns The input string in Title Case.
+ */
 export function toTitleCase(str: string) {
   return str.replace(
     /\w\S*/g,

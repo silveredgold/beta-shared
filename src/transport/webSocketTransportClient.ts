@@ -9,6 +9,10 @@ export interface EventPayload {
     [x: string]: unknown;
 }
 
+/**
+ * A generic transport client for transports that use WebSockets to communicate with 
+ * a backend.
+ */
 export abstract class WebSocketTransportClient {
 
     protected _requestId?: string;
@@ -28,6 +32,11 @@ export abstract class WebSocketTransportClient {
 
     static defaultHost = "ws://localhost:8090/ws"
 
+    /**
+     * Sends an object to the server using the current socket connection.
+     * @param message The object to serialize and send.
+     * @param callback A callback to run after sending.
+     */
     sendObj = (message: object, callback?: () => any | void) => {
         this.send(JSON.stringify(message), callback);
     }
@@ -47,16 +56,20 @@ export abstract class WebSocketTransportClient {
 
     _onPublishMessage = new EventDispatcher<WebSocketTransportClient, EventPayload>();
 
+    /**
+     * Event that is dispatched whenever a socket event occurs.
+     */
     get onPublishMessage() {
         return this._onPublishMessage.asEvent();
     }
 
-
+    /**
+     * Returns whether the current transport is ready for messages.
+     */
     public get ready(): boolean {
         // return this.webSocket?.readyState === 1;
         return true;
     }
-
 
     protected connectTo = (host?: string): Sockette | undefined => {
         host ??= WebSocketTransportClient.defaultHost;
@@ -106,6 +119,9 @@ export abstract class WebSocketTransportClient {
 
     abstract processServerMessage: (arg0: any) => Promise<any>;
 
+    /**
+     * Closes the current socket transport.
+     */
     close = () => {
         this.webSocket?.close(1000);
     }

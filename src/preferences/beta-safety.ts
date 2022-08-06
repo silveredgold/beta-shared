@@ -3,6 +3,9 @@ import { toTitleCase } from "..";
 import { defaultPrefs } from "./preferences";
 import { CensorType, IPreferences, OperationMode } from "./types";
 
+/**
+ * The preferences as Beta Safety uses/stores them.
+ */
 export type BetaSafetyPreferences = {
     video: string;
     modus: string;
@@ -48,7 +51,11 @@ export type BetaSafetyPreferences = {
     selectedStickers: string[];
 }
 
-
+/**
+ * Converts preferences as received from Beta Safety into the format used in this package.
+ * @param raw The preferences to convert in Beta Safety format.
+ * @returns The preferences in beta-shared format.
+ */
 export function createPreferencesFromBackend(raw: BetaSafetyPreferences): IPreferences {
 
     return {
@@ -99,6 +106,11 @@ export function createPreferencesFromBackend(raw: BetaSafetyPreferences): IPrefe
     }
 }
 
+/**
+ * Converts a set of user censoring preferences to the format Beta Safety expects.
+ * @param prefs The user censoring preferences.
+ * @returns The equivalent Beta Safety-compatible representation of those preferences.
+ */
 export const toBetaSafety = (prefs: IPreferences): Partial<BetaSafetyPreferences> => {
     return {
         animate: prefs.autoAnimate.toString(),
@@ -157,22 +169,34 @@ function toSupportedEyeType(type: CensorType): string {
     }
 }
 
+/**
+ * Extracts a censoring mode for a specific key from a Beta Safety configuration object.
+ * @param rawPrefs Beta Safety preferences
+ * @param key The preferences key to extract.
+ * @returns The censor mode.
+ * @internal
+ */
 function getCensorObj(rawPrefs: BetaSafetyPreferences, key: string): {method: CensorType, level: number} {
     return {method: parseBackendType(rawPrefs[key].replace(key, "")), level: +rawPrefs[key + "level"]};
 }
 
-function parseModus(rawType: string): OperationMode {
-    switch (rawType) {
-        case "standardmodus":
-            return OperationMode.Enabled;
-        case "demandmous":
-            return OperationMode.OnDemand;
-        case "disablemodus":
-        default:
-            return OperationMode.Disabled;
-    }
-}
+// function parseModus(rawType: string): OperationMode {
+//     switch (rawType) {
+//         case "standardmodus":
+//             return OperationMode.Enabled;
+//         case "demandmous":
+//             return OperationMode.OnDemand;
+//         case "disablemodus":
+//         default:
+//             return OperationMode.Disabled;
+//     }
+// }
 
+/**
+ * Converts an operation mode into the raw "modus" used by Beta Safety.
+ * @param mode The operation mode.
+ * @returns The Beta Safety-equivalent operation mode.
+ */
 function parseMode(mode: OperationMode): string {
     switch (mode) {
         case OperationMode.Disabled:
@@ -184,6 +208,11 @@ function parseMode(mode: OperationMode): string {
     }
 }
 
+/**
+ * Converts a censor method into the magic string equivalent for Beta Safety.
+ * @param type The censoring method.
+ * @returns The Beta Safety equivalent method string.
+ */
 function parseType(type: CensorType): string {
     switch (type) {
         case CensorType.BlackBox:
@@ -199,6 +228,11 @@ function parseType(type: CensorType): string {
     }
 }
 
+/**
+ * Parses Beta Safety's magic string censoring mode to its equivalent object.
+ * @param type The Beta Safety censoring mode.
+ * @returns The equivalent censoring method object.
+ */
 function parseBackendType(type: string): CensorType {
     switch (type) {
         case "bb":

@@ -1,8 +1,9 @@
-
-
 import { IPreferences } from "./types";
 import { CensorMode } from "./types";
 
+/**
+ * The censor modes supported/used by the NudeNet model.
+ */
 export type NudeNetPreferences = {
     EXPOSED_ANUS: CensorMode;
     EXPOSED_ARMPITS: CensorMode;
@@ -22,6 +23,11 @@ export type NudeNetPreferences = {
     EXPOSED_GENITALIA_M: CensorMode;
 }
 
+/**
+ * Extracts the censor modes from a user preferences to match the NudeNet classes.
+ * @param prefs The user preferences to draw from.
+ * @returns The NudeNet equivalent representation.
+ */
 export const toNudeNet = (prefs: IPreferences): Partial<NudeNetPreferences> => {
     return {
         COVERED_BELLY: prefs.covered.Belly,

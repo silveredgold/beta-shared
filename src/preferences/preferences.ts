@@ -34,15 +34,7 @@ export const defaultPrefs: IPreferences = {
     saveLocalCopy: false,
     obfuscateImages: false,
     autoAnimate: false,
-    // enabledPlaceholders: [],
     enabledStickers: [],
-    // subliminal: {
-    //     enabled: false,
-    //     delay: 4000,
-    //     duration: 250
-    // },
-    // allowList: [],
-    // forceList: [],
     errorMode: 'normal',
     hideDomains: true
 }
