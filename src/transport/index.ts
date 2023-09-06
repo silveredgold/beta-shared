@@ -1,6 +1,8 @@
 import { IPreferences } from "../preferences";
 import type { IEvent } from "strongly-typed-events";
 
+export * from './webSocketTransportClient';
+
 export type ActionEntity = 'statistics'|'preferences'|'stickers';
 
 /**
@@ -148,8 +150,10 @@ export interface ICensorBackend {
     /**
      * Censor a given image based on the given censoring request.
      * @param request The image censoring request.
+     * @returns Either the censored image response, or `true` if the server has accepted the request asynchronously and 
+     * will return it through the `onImageCensored` event.
      */
-    censorImage(request: ImageCensorRequest): Promise<ImageCensorResponse|undefined>;
+    censorImage(request: ImageCensorRequest): Promise<boolean|ImageCensorResponse|undefined>;
     /**
      * An event fired when the backend has completed censoring a request and the client can continue.
      */
