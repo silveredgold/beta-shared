@@ -1,5 +1,5 @@
 {
     "$schema": "https://typedoc.org/schema.json",
-    "entryPoints": ["./src/index.ts", "./src/transport/index.ts", "./src/preferences/index.ts"],
+    "entryPoints": ["./src/index.ts", "./src/transport/index.ts", "./src/transport/beta-safety/index.ts", "./src/preferences/index.ts"],
     "includeVersion": true
 }
